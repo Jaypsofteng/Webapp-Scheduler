@@ -23,5 +23,5 @@ CURD operations for programs/courses with individual views
 Calendar functionality( Select holidays for the timeline ) for auto allocation of programs/courses 
 
 ## Images showcasing basic application overview
-[![Home page](\WebApp-Scheduler\project-design\Webcapture_17-4-2023_14513_localhost.jpeg)]
-[![Calendar Page](\WebApp-Scheduler\project-design\Webcapture_17-4-2023_145035_localhost.jpeg)]
+[![Home page](/WebApp-Scheduler/project-design/Webcapture_17-4-2023_14513_localhost.jpeg)](https://github.com/Jaypsofteng/Webapp-Scheduler.git)
+[![Calendar Page](/WebApp-Scheduler/project-design/Webcapture_17-4-2023_145035_localhost.jpeg)](https://github.com/Jaypsofteng/Webapp-Scheduler.git)
