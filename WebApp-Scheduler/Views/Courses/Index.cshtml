@@ -1,0 +1,122 @@
+﻿@model IEnumerable<WebApp_Scheduler.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{ var tempProgramId = (int)@ViewBag.ProgramId;}
+
+<p style="margin: 5px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: chocolate;">
+    @Html.ActionLink("Calculate Schedule", "CalculateSchedule", new { programId = tempProgramId }, new { @class = "btn btn-default" }) ||
+    @Html.ActionLink("Select Holidays", "ProgramTimeline", "Calendars", new { ProgramId = tempProgramId }, new { @class = "btn btn-default" }) ||->
+    @Html.ActionLink("See Calendar", "UpdateCalendar", "Courses", new { programId = tempProgramId }, new { @class = "btn btn-default" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th>
+            @Html.DisplayName("Prerequsite")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Instructor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoursPerDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleType.DayOption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseName)
+            </td>
+            <td>
+                @*prerequsite partial model*@
+                @{
+                    Html.RenderAction("DisplayPrerequsite", new { courseId = item.Id });
+                }
+                <span style="color: olivedrab !important;" class="change"> @Html.ActionLink("Change", "AddPrerequisite", new { courseId = item.Id })</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instructor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoursPerDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleType.DayOption)
+            </td>
+            <td>
+                @if (@item.StartDate != null)
+                {
+                    @item.StartDate.Value.ToString("dddd, dd MMMM yyyy")
+
+                }
+            </td>
+            <td>
+                @if (item.EndDate != null)
+                {
+                    @item.EndDate.Value.ToString("dddd, dd MMMM yyyy")
+
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @{
+        Html.RenderAction("ProgramDetails", new { Id = tempProgramId });
+    }
+</p>
+<p style="font-family: 'Bell MT';">
+    <hr/>
+    <p style="color: darkseagreen;">
+
+        To generate Excel Data please click @Html.ActionLink("generate", "Index", "Schedules", new { programId = tempProgramId }, new { @class = "btn btn-default" })
+        Files are generated in Excel Folder on server.
+    </p>
+
+    <b style="color: darkseagreen;">
+        Reminder: First time when schedule is calculated, click on Add Holidays and then click on See Calendar.
+    </b>
+</p>
+
+

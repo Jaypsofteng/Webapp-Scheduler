@@ -1,0 +1,52 @@
+﻿@model WebApp_Scheduler.Models.ListOfCourseSelectionViewModel
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div>
+        <h4>Prerequisites Courses</h4>
+        <hr />
+
+        <dl class="dl-horizontal">
+            <b> Selected Prerequisite Courses</b>
+            @foreach (var c in Model.selectedCourses)
+            {
+                <dd>
+                    <span style="border: 1px solid lightgray; padding: 3px; margin: 3px;">
+                        @c.CourseName
+                        <span> @Html.ActionLink("Remove", "RemovePrerequisite", new { Id = c.Id, CourseId = Model.CourseId }) </span>
+                    </span>
+                </dd>
+
+            }
+
+        </dl>
+        <br />
+        <dl class="dl-horizontal">
+            <b> Select Prerequisite Courses</b>
+
+            @foreach (var o in Model.selectOptions)
+            {
+                <dd>
+                    <span style="border: 1px solid lightgray; padding: 3px; margin: 3px;">
+
+                        @o.CourseName  <span> @Html.ActionLink("Add", "AddPrerequisiteConfirm", new { Id = o.Id, CourseId = Model.CourseId }) </span>
+
+                    </span>
+                </dd>
+            }
+
+
+        </dl>
+        <br />
+    </div>
+
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "Index", "Courses", new { IdOfProgram = @Model.IdOfProgram }, new { @class = "btn btn-default" })
+</p>
+
+
